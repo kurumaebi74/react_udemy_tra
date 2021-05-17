@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
 
 // classコンポーネント
 // class App extends Component
@@ -22,30 +22,38 @@ import PropTypes from 'prop-types';
 // }
 // 関数コンポーネント
 const App = () => {
-	const profiles = [
-		{name: "taro", age:10},
-		{name: "hanako", age:5},
-		{name: "Noname"}
-	]
 	return (
-	<div>
-		{
-			profiles.map((profiles, index) =>{
-				return <User name={profiles.name} age={profiles.age} key={index}/>
-			})
-		}
-	</div>
-	)
+	<Counter></Counter>
+	);
 }
 
-const User = (props) => {
-	return <div>this, I am {props.name}, and {props.age} yers old!</div>
+class Counter extends Component {
+	constructor(props)
+	{
+		super(props);
+		this.state ={count:0};
+	}
+
+	handlePulsButton = () => {
+		this.setState({count: this.state.count + 1});
+	}
+
+	handleMinusButton = () =>{
+		this.setState({count: this.state.count -1});
+	}
+
+	render(){
+		console.log("render");
+		return(
+			<React.Fragment>
+				<div>count: { this.state.count }</div>
+				<button onClick={this.handlePulsButton}>+1</button>
+				<button onClick={this.handleMinusButton}>-1</button>
+			</React.Fragment>
+		);
+	}
 }
 
-User.propTypes = {
-	name: PropTypes.string,
-	age: PropTypes.number.isRequired
-}
 // javascriptで書いた場合
 // class App extends Component
 // {
