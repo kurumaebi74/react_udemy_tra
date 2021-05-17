@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // classコンポーネント
 // class App extends Component
@@ -24,7 +25,7 @@ const App = () => {
 	const profiles = [
 		{name: "taro", age:10},
 		{name: "hanako", age:5},
-		{name: "why"}
+		{name: "Noname"}
 	]
 	return (
 	<div>
@@ -41,8 +42,9 @@ const User = (props) => {
 	return <div>this, I am {props.name}, and {props.age} yers old!</div>
 }
 
-User.defaultProps = {
-	age:1
+User.propTypes = {
+	name: PropTypes.string,
+	age: PropTypes.number.isRequired
 }
 // javascriptで書いた場合
 // class App extends Component
