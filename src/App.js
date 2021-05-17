@@ -21,21 +21,29 @@ import React, { Component } from 'react';
 // }
 // 関数コンポーネント
 const App = () => {
+	const profiles = [
+		{name: "taro", age:10},
+		{name: "hanako", age:5},
+		{name: "why"}
+	]
 	return (
 	<div>
-		<Cat />
-		<Cat />
-		<Cat />
-		<Cat />
-		<Cat />
+		{
+			profiles.map((profiles, index) =>{
+				return <User name={profiles.name} age={profiles.age} key={index}/>
+			})
+		}
 	</div>
 	)
 }
 
-const Cat = () => {
-	return <div>MEow!</div>
+const User = (props) => {
+	return <div>this, I am {props.name}, and {props.age} yers old!</div>
 }
 
+User.defaultProps = {
+	age:1
+}
 // javascriptで書いた場合
 // class App extends Component
 // {
