@@ -1,69 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-
-// classコンポーネント
-// class App extends Component
-// {
-// 	render()
-// 	{
-// 		// Classと入れ込み
-// 			// const greeting = "Hi";
-// 			// const dom = <div className="foo">{greeting}</div>
-// 		// 代入してreturnもできる
-// 			// const dom = <h1>Hello, world!</h1>;
-// 			// return dom;
-// 		return (
-// 			<React.Fragment>
-// 				<label htmlFor="bar">bar</label>
-// 				<input type="text" onChange={() => {console.log("I am clicked!")}} />
-// 			</React.Fragment>
-// 		)
-// 	}
-// }
-// 関数コンポーネント
-const App = () => {
-	return (
-	<Counter></Counter>
-	);
-}
-
-class Counter extends Component {
-	constructor(props)
-	{
-		super(props);
-		this.state ={count:0};
-	}
-
-	handlePulsButton = () => {
-		this.setState({count: this.state.count + 1});
-	}
-
-	handleMinusButton = () =>{
-		this.setState({count: this.state.count -1});
-	}
-
+import { increment, decrement } from '../action';
+class App extends Component {
 	render(){
-		console.log("render");
+		const props = this.props
 		return(
 			<React.Fragment>
-				<div>count: { this.state.count }</div>
-				<button onClick={this.handlePulsButton}>+1</button>
-				<button onClick={this.handleMinusButton}>-1</button>
+				<div>value: { props.value }</div>
+				<button onClick={props.increment}>+1</button>
+				<button onClick={props.decrement}>-1</button>
 			</React.Fragment>
 		);
 	}
 }
 
-// javascriptで書いた場合
-// class App extends Component
-// {
-// 	render() {
-// 		return React.createElement
-// 		(
-// 			"div",
-// 			null,
-// 			"Hello"
-// 		);
-// 	}
-// }
-export default App;
+const mapStateToProps = state => ({ value: state.count.value })
+const mapDispatchToProps = disppatch =>({
+	increment: () => disppatch(increment()),
+	decrement: () => disppatch(decrement())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
